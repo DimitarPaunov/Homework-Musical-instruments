@@ -24,7 +24,7 @@ public class Shop {
 		}
 		instruments = new TreeMap<>();
 		this.instruments.put(InstrumentType.STRUNNI,new HashMap<>());
-		this.instruments.get(InstrumentType.STRUNNI).put("Harman", new Violin("Harmans",850,8));
+		this.instruments.get(InstrumentType.STRUNNI).put("Harman", new Violin("Harmans",850,-1));
 		this.instruments.get(InstrumentType.STRUNNI).put("Fender", new Guitar("Fenders",800, 4));
 		this.instruments.put(InstrumentType.UDARNI, new HashMap<>());
 		this.instruments.get(InstrumentType.UDARNI).put("Yamaha", new Drums("Yamahite", 2000, 7));
@@ -62,7 +62,7 @@ public class Shop {
 				i.increaseQuantity(quantity);
 				this.money-=(quantity*i.getPrice())*0.5;
 				if(this.money > 0) {
-					System.out.println("Added sucessfuly! Now " +i.getQuantity() +" quanity is available!");
+					System.out.println("Added sucessfuly! Now " +i.getQuantity() +" quantity is available!");
 				}
 				else {
 					i.decreaseQuantity(quantity);
@@ -78,7 +78,7 @@ public class Shop {
 			TreeSet<Instrument> sorted = new TreeSet<>(comp);
 			sorted.addAll(instruments.get(type).values());
 			for(Instrument i: sorted) {
-				System.out.println(i);
+				System.out.println(i.getClass().getSimpleName() + " " +i);
 			}
 		}
 	}
@@ -86,7 +86,7 @@ public class Shop {
 		for(InstrumentType type: instruments.keySet()) {
 			System.out.println("==============================" +type +"================================");
 			for(Instrument i: instruments.get(type).values()) {
-				System.out.println(i);
+				System.out.println(i.getClass().getSimpleName() + " " +i);
 			}
 		}
 	}
@@ -126,6 +126,20 @@ public class Shop {
 			}
 			
 		});
+	}
+	public void printAvailableInstruments() {
+		System.out.println("The available instruments by categories are : \n" );
+		for(InstrumentType type: instruments.keySet()) {
+			System.out.println("================================" +type + "==================================");
+			for(Instrument i: instruments.get(type).values()) {
+				if(i.getQuantity() > 0) {
+					System.out.println(i.getClass().getSimpleName() + " " +i);
+				}
+				else {
+					System.out.println("The instrument " +i.getClass().getSimpleName() +"(" +i.getName() +")" + " is not available right now!");
+				}
+			}
+		}
 	}
 	
 	public double getMoney() {
