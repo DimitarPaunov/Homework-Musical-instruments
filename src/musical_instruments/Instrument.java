@@ -15,8 +15,10 @@ public abstract class Instrument {
 		if(name != null && !(name.isEmpty())){
 			this.name = name;
 		}
-		if(price > 0 && quantity > -1) {
+		if(price > 0) {
 			this.price = price;
+		}
+		if(quantity > -1) {
 			this.quantity = quantity;
 		}
 		this.type = type;
