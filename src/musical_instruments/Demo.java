@@ -4,12 +4,14 @@ public class Demo {
 	
 	public static void main(String[] args) {
 		
-		Shop s = new Shop("PaunovShop",4000);
-		s.receive("Yamaha", 3);
-		s.printInstrumentByPrice();
+		Shop dp = new Shop("PaunovShop",4000);
+		dp.receive("Fender", 3);
 		System.out.println();
 		System.out.println();
-		s.printInstrumentByName();
+		dp.sell("Harman", 2);
+		dp.printInstrumentByName();
+		System.out.println();
+		dp.printAvailableInstruments();
 		
 		
 		
