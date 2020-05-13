@@ -24,7 +24,7 @@ public class Shop {
 		}
 		instruments = new TreeMap<>();
 		this.instruments.put(InstrumentType.STRUNNI,new HashMap<>());
-		this.instruments.get(InstrumentType.STRUNNI).put("Harman", new Violin("Harmans",850,-1));
+		this.instruments.get(InstrumentType.STRUNNI).put("Harman", new Violin("Harmans",850,2));
 		this.instruments.get(InstrumentType.STRUNNI).put("Fender", new Guitar("Fenders",800, 4));
 		this.instruments.put(InstrumentType.UDARNI, new HashMap<>());
 		this.instruments.get(InstrumentType.UDARNI).put("Yamaha", new Drums("Yamahite", 2000, 7));
@@ -41,8 +41,10 @@ public class Shop {
 	}
 	
 	public void sell(String name, int quantity) {
+		boolean containsName = false;
 		for(InstrumentType type: instruments.keySet()) {
 			if(instruments.get(type).containsKey(name)) {
+				containsName = true;
 				Instrument i = instruments.get(type).get(name);
 				if(i.getQuantity() < quantity) {
 					System.out.println("Not enough quantity! Only " +i.getQuantity() + " left!");
@@ -54,10 +56,15 @@ public class Shop {
 				}
 			}
 		}
+		if(!containsName) {
+			System.out.println("Wrong name or there is no such instrument in the shop");
+		}
 	}
 	public void receive(String name, int quantity) {
+		boolean containsName = false;
 		for(InstrumentType type: instruments.keySet()) {
 			if(instruments.get(type).containsKey(name)) {
+				containsName = true;
 				Instrument i = instruments.get(type).get(name);
 				i.increaseQuantity(quantity);
 				this.money-=(quantity*i.getPrice())*0.5;
@@ -70,6 +77,9 @@ public class Shop {
 					System.out.println("The shop run out of money!");
 				}
 			}
+		}
+		if(!containsName) {
+			System.out.println("Wrong name or there is no such instrument in the shop");
 		}
 	}
 	private void showInfo(Comparator<Instrument> comp) {
@@ -141,7 +151,6 @@ public class Shop {
 			}
 		}
 	}
-	
 	public double getMoney() {
 		return money;
 	}
