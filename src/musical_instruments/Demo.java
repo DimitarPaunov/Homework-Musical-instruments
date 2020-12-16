@@ -16,6 +16,11 @@ public class Demo {
 		dp.printInstrumentByName();
 		
 		System.out.println();
+		System.out.println();
+		
+		dp.printInstrumentsByType();
+		
+		System.out.println();
 		
 		dp.printAvailableInstruments();
 		
